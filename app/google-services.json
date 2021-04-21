@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "823270671004",
+    "project_id": "printing-solution-28242",
+    "storage_bucket": "printing-solution-28242.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:823270671004:android:c7e841c975dc8466cfe359",
+        "android_client_info": {
+          "package_name": "com.example.printing_solution"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "823270671004-63430v7puh2eqbouhiivvjet617qgrs9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDR1hTiYGVPlQsltN7ISqICBoY7ue-npH4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "823270671004-63430v7puh2eqbouhiivvjet617qgrs9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

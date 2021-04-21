@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Printing Solution</string>
+
+    <string name="FlexQuilty_prompt">Choose a country</string>
+
+    <string-array name="FlexQuilty_arrays">
+        <item>Select Quality</item>
+        <item>China</item>
+        <item>Star</item>
+        <item>Backlit just flex</item>
+        <item>Backlit with all</item>
+        <item>Onevision with pasting</item>
+        <item>Vinyal with pasting</item>
+        <item>Vinyal with pasting+lamentation</item>
+        <item>Reflector</item>
+    </string-array>
+
+
+    <!--    <string-array name="CardQuilty_arrays">-->
+    <!--        <item>Simple shine</item>-->
+    <!--        <item>simple mate</item>-->
+    <!--        <item>UV</item>-->
+    <!--        <item>UV Double Pasting</item>-->
+    <!--        <item>PVC Card</item>-->
+    <!--    </string-array>-->
+
+</resources><!--    Simple shine, simple mate, Uv, Uv Double pasting, PVC Card-->
