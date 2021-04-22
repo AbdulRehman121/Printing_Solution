@@ -9,12 +9,27 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Printing_Solution">
-        <activity android:name=".Admin" android:screenOrientation="portrait"></activity>
-        <activity android:name=".Flex" android:screenOrientation="portrait" />
-        <activity android:name=".registration" android:screenOrientation="portrait" />
-        <activity android:name=".User" android:screenOrientation="portrait" />
-        <activity android:name=".login" android:screenOrientation="portrait"/>
-        <activity android:name=".MainActivity" android:screenOrientation="portrait">
+        <activity
+            android:name=".New_Olders"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".Admin"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Flex"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".registration"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".User"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".login"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

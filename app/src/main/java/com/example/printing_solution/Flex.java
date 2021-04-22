@@ -30,8 +30,8 @@ import static java.lang.System.exit;
 public class Flex extends AppCompatActivity {
 private Spinner spinner1;
 private Button calculate,oder;
-private TextView height,wirth,cost,Quantaty;
-public String SI,heights,width,Q, values;
+private TextView height,wirth,cost,Quantaty,address,textfild;
+public String SI,heights,width,Q, values,ds;
 public Double size,h,w,p,q;
 public int val;
 private DatabaseReference mDatabase;
@@ -39,7 +39,6 @@ private DatabaseReference mDatabase;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_flex);
-
         spinner1=(Spinner)findViewById(R.id.spinner1);
 height=findViewById(R.id.height);
 wirth=findViewById(R.id.width);
@@ -48,6 +47,9 @@ Quantaty=findViewById(R.id.Quantaty);
 p=1.00;
 calculate=(Button) findViewById(R.id.calculate);
 oder=(Button)findViewById(R.id.Oder);
+address=findViewById(R.id.PostalAddress);
+    textfild=findViewById(R.id.textfild);
+
         ArrayAdapter<String> myAdapter= new ArrayAdapter<String>
      (Flex.this, android.R.layout.simple_list_item_1,
             getResources().getStringArray(R.array.FlexQuilty_arrays));
@@ -122,15 +124,26 @@ calculate.setOnClickListener(new View.OnClickListener() {
         }
         p=p*q;
         cost.setText("Rs."+p.toString());
+        address.setVisibility(address.VISIBLE);
+        textfild.setVisibility(textfild.VISIBLE);
         oder.setVisibility(oder.VISIBLE);
     }
 
 });
+
+
 oder.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
         //get current order
         DatabaseReference cdbname = FirebaseDatabase.getInstance().getReference();
+
+        ds=address.getText().toString().trim();
+        if(ds.isEmpty())
+        {
+            Toast.makeText(getApplicationContext(), "Delivery Address Missing", LENGTH_SHORT).show();
+            return;
+        }
         //change current order value
         if (!height.getText().toString().equals(null) || !wirth.getText().toString().equals(null)) {
             cdbname.addValueEventListener(new ValueEventListener() {
@@ -148,16 +161,21 @@ oder.setOnClickListener(new View.OnClickListener() {
                     userMap.put("Height", heights);
                     userMap.put("Width", width);
                     userMap.put("Quantity", Q);
+                    userMap.put("Quality", SI);
                     userMap.put("Price", p.toString());
                     userMap.put("Status", "Order Placed");
+                    userMap.put("Product", "Flex");
+                    userMap.put("DAddress", ds);
                     if (!height.getText().toString().equals(null)) {
                         mDatabase.setValue(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
-                                    Toast.makeText(getApplicationContext(), "Order Placed", Toast.LENGTH_SHORT).show();val = val + 1;
+                                    Toast.makeText(getApplicationContext(), "Order Placed", Toast.LENGTH_SHORT).show();
+                                    val = val + 1;
                                     values = String.valueOf(val);
                                     cdbname.child("prev_value").setValue(values);
+
                                     exit(0);
 
                                     height.setText(null);
