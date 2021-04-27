@@ -21,19 +21,21 @@ import com.google.firebase.database.ValueEventListener;
 public class User extends AppCompatActivity {
     TextView UN,W,H,MN;
     DatabaseReference DR;
-    private FirebaseUser FU;
+   // private FirebaseUser FU;
     private String FID;
-private Button Flex;
+private Button Flex,orders;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        FU = FirebaseAuth.getInstance().getCurrentUser();
+     //   FU = FirebaseAuth.getInstance().getCurrentUser();
         setContentView(R.layout.activity_user);
         Flex=(Button)findViewById(R.id.Flex);
+        orders=(Button)findViewById(R.id.Orders);
         UN = (TextView) findViewById(R.id.username);
         W = (TextView) findViewById(R.id.city);
         H = (TextView) findViewById(R.id.email);
         MN = (TextView) findViewById(R.id.MN);
+
         FID = FirebaseAuth.getInstance().getCurrentUser().getUid();
         DR = FirebaseDatabase.getInstance().getReference().child("Users").child(String.valueOf(FID));
         DR.addValueEventListener(new ValueEventListener() {
@@ -65,7 +67,13 @@ private Button Flex;
                 startActivity(intent2);
             }
         });
-
+orders.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        Intent intent3=new Intent(User.this,C_Orders.class);
+        startActivity(intent3);
+    }
+});
 
     }
 }

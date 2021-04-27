@@ -3,13 +3,14 @@ package com.example.printing_solution;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.snackbar.BaseTransientBottomBar;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -20,13 +21,13 @@ import com.google.firebase.database.ValueEventListener;
 
 import static android.widget.Toast.LENGTH_SHORT;
 
-public class New_Olders extends AppCompatActivity {
-private TextView cn,cmn,cem,cci,pn,pqul,pqan,ps,da,pp;
+public class New_Olders extends AppCompatActivity implements View.OnClickListener{
+private TextView cn,cmn,cem,cci,pn,pqul,pqan,ps,da,pp,ono,os;
     DatabaseReference DR,DR1;
     private FirebaseUser FU;
     private String FID,UU,values,sv1;
-    private Button next,previous;
-    private int  val,v1=1;
+    private Button previous,load;
+    private int  val,v1=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,8 +43,13 @@ private TextView cn,cmn,cem,cci,pn,pqul,pqan,ps,da,pp;
         ps=findViewById(R.id.size);
         da=findViewById(R.id.address);
         pp=findViewById(R.id.pp);
-        next=findViewById(R.id.next);
-        previous=findViewById(R.id.Previous);
+        ono=findViewById(R.id.OrderNo);
+        os=findViewById(R.id.Ostatus);
+        previous=findViewById(R.id.prev);
+        previous.setVisibility(previous.GONE);
+        previous.setOnClickListener(this);
+        load = (Button)findViewById(R.id.load);
+        load.setOnClickListener(this);
         //FID = FirebaseAuth.getInstance().getCurrentUser().getUid();
         DatabaseReference cdbname = FirebaseDatabase.getInstance().getReference();
         cdbname.addValueEventListener(new ValueEventListener() {
@@ -60,64 +66,65 @@ private TextView cn,cmn,cem,cci,pn,pqul,pqan,ps,da,pp;
             }
         });
 
-       // for(int i=1;v1==i;i++) {
-             sv1 = String.valueOf(v1);
-
-             DR = FirebaseDatabase.getInstance().getReference().child("Orders").child(sv1);
-             DR.addValueEventListener(new ValueEventListener() {
-                 @Override
-                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                     pn.setText(snapshot.child("Product").getValue().toString());
-                     pqul.setText(snapshot.child("Quality").getValue().toString());
-                     ps.setText(snapshot.child("Height").getValue().toString() + " x " + snapshot.child("Width").getValue().toString());
-                     //  pqan.setText(snapshot.child("Quantity").getValue().toString());
-                     da.setText(snapshot.child("DAddress").getValue().toString());
-                     pp.setText(snapshot.child("Price").getValue().toString());
-
-                     UU = (snapshot.child("User Id").getValue().toString());
-                     DR1 = FirebaseDatabase.getInstance().getReference().child("Users").child(UU);
-                     DR1.addValueEventListener(new ValueEventListener() {
-                         @Override
-                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                             cn.setText(snapshot.child("name").getValue().toString().trim());
-                             cmn.setText(snapshot.child("mobile_no").getValue().toString().trim());
-                             cem.setText(snapshot.child("email").getValue().toString().trim());
-                             cci.setText(snapshot.child("City").getValue().toString().trim());
-
-                         }
-
-                         @Override
-                         public void onCancelled(@NonNull DatabaseError error) {
-
-                         }
-                     });
-
-
-                 }
-
-
-                 @Override
-                 public void onCancelled(@NonNull DatabaseError error) {
-
-
-                 }
-
-             });
-             next.setOnClickListener(new View.OnClickListener() {
-                 @Override
-                 public void onClick(View v) {
-                     v1++;
-                     Toast.makeText(getApplicationContext(), sv1+","+val, Toast.LENGTH_SHORT).show();
-//                     Intent intent1=new Intent(New_Olders.this,New_Olders.class);
-//                     startActivity(intent1);
-
-                 }
-             });
-//            if(val<=v1) {
-//            continue;
-//            }
-
         }
-         }
-    //}
 
+    @Override
+    public void onClick(View v) {
+
+        if(v.getId() == R.id.load){
+            previous.setVisibility(previous.VISIBLE);
+            load.setText("Next");
+            ++v1;
+        }
+        else if(v.getId() == R.id.prev && v1!=1)
+        {
+           // Toast.makeText(getApplicationContext(),"First Item Shown",LENGTH_SHORT).show();
+            v1=v1-1;
+        }
+        if (v1<val && v1!=0)
+        {
+        sv1 = String.valueOf(v1);
+        ono.setText("Order NO: "+sv1);
+        DR = FirebaseDatabase.getInstance().getReference().child("Orders").child(sv1);
+        DR.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                pn.setText("Product: "+snapshot.child("Product").getValue().toString());
+                pqul.setText("Quality: "+snapshot.child("Quality").getValue().toString());
+                ps.setText("Size: "+snapshot.child("Height").getValue().toString() + " x " + snapshot.child("Width").getValue().toString());
+                //  pqan.setText(snapshot.child("Quantity").getValue().toString());
+                da.setText("Delivrey Address: "+snapshot.child("DAddress").getValue().toString());
+                pp.setText("Price: "+snapshot.child("Price").getValue().toString());
+                os.setText("Status: "+snapshot.child("Status").getValue().toString());
+                UU = (snapshot.child("User Id").getValue().toString());
+                DR1 = FirebaseDatabase.getInstance().getReference().child("Users").child(UU);
+                DR1.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        cn.setText("Nmae: "+snapshot.child("name").getValue().toString().trim());
+                        cmn.setText("Mobile No: "+snapshot.child("mobile_no").getValue().toString().trim());
+                        cem.setText("Email: "+snapshot.child("email").getValue().toString().trim());
+                        cci.setText("City: "+snapshot.child("City").getValue().toString().trim());
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+    else
+        {
+            Toast.makeText(getApplicationContext(),"End of list",LENGTH_SHORT).show();
+        }
+    }
+
+}
