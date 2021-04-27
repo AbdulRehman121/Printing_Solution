@@ -3,7 +3,6 @@ package com.example.printing_solution;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -30,7 +29,7 @@ import static java.lang.System.exit;
 public class Flex extends AppCompatActivity {
 private Spinner spinner1;
 private Button calculate,oder;
-private TextView height,wirth,cost,Quantaty,address,textfild;
+private TextView height,wirth,cost,Quantaty,address,da;
 public String SI,heights,width,Q, values,ds;
 public Double size,h,w,p,q;
 public int val;
@@ -48,7 +47,7 @@ p=1.00;
 calculate=(Button) findViewById(R.id.calculate);
 oder=(Button)findViewById(R.id.Oder);
 address=findViewById(R.id.PostalAddress);
-    textfild=findViewById(R.id.textfild);
+    da=findViewById(R.id.DA);
 
         ArrayAdapter<String> myAdapter= new ArrayAdapter<String>
      (Flex.this, android.R.layout.simple_list_item_1,
@@ -125,7 +124,7 @@ calculate.setOnClickListener(new View.OnClickListener() {
         p=p*q;
         cost.setText("Rs."+p.toString());
         address.setVisibility(address.VISIBLE);
-        textfild.setVisibility(textfild.VISIBLE);
+        da.setVisibility(da.VISIBLE);
         oder.setVisibility(oder.VISIBLE);
     }
 
@@ -153,7 +152,6 @@ oder.setOnClickListener(new View.OnClickListener() {
                     val = new Integer(values);
                     FirebaseUser current_user = FirebaseAuth.getInstance().getCurrentUser();
                     String uid = current_user.getUid();
-
                     mDatabase = FirebaseDatabase.getInstance().getReference().child("Orders").child(values);
                     HashMap<String, String> userMap = new HashMap<>();
                     userMap.put("User Id", uid);

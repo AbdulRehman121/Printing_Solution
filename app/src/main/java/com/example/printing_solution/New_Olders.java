@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,9 +26,10 @@ import static android.widget.Toast.LENGTH_SHORT;
 public class New_Olders extends AppCompatActivity implements View.OnClickListener{
 private TextView cn,cmn,cem,cci,pn,pqul,pqan,ps,da,pp,ono,os;
     DatabaseReference DR,DR1;
+    private Spinner spinner1;
     private FirebaseUser FU;
-    private String FID,UU,values,sv1;
-    private Button previous,load;
+    private String FID,UU,values,sv1,SI;
+    private Button previous,load,up;
     private int  val,v1=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,11 +48,20 @@ private TextView cn,cmn,cem,cci,pn,pqul,pqan,ps,da,pp,ono,os;
         pp=findViewById(R.id.pp);
         ono=findViewById(R.id.OrderNo);
         os=findViewById(R.id.Ostatus);
+        up=(Button)findViewById(R.id.update);
+        up.setVisibility(up.GONE);
         previous=findViewById(R.id.prev);
         previous.setVisibility(previous.GONE);
         previous.setOnClickListener(this);
         load = (Button)findViewById(R.id.load);
         load.setOnClickListener(this);
+        spinner1=findViewById(R.id.spinner2);
+        spinner1.setVisibility(spinner1.GONE);
+        ArrayAdapter<String> myAdapter= new ArrayAdapter<String>
+                (New_Olders.this, android.R.layout.simple_list_item_1,
+                        getResources().getStringArray(R.array.Status_arrays));
+        myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner1.setAdapter(myAdapter);
         //FID = FirebaseAuth.getInstance().getCurrentUser().getUid();
         DatabaseReference cdbname = FirebaseDatabase.getInstance().getReference();
         cdbname.addValueEventListener(new ValueEventListener() {
@@ -65,7 +77,24 @@ private TextView cn,cmn,cem,cci,pn,pqul,pqan,ps,da,pp,ono,os;
 
             }
         });
+        up.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SI= spinner1.getSelectedItem().toString().trim();
+                Toast.makeText(getApplicationContext(),SI,LENGTH_SHORT).show();
+cdbname.addValueEventListener(new ValueEventListener() {
+    @Override
+    public void onDataChange(@NonNull DataSnapshot snapshot) {
+        cdbname.child("Orders").child(sv1).child("Status").setValue(SI);
+    }
 
+    @Override
+    public void onCancelled(@NonNull DatabaseError error) {
+
+    }
+});
+            }
+       });
         }
 
     @Override
@@ -73,6 +102,8 @@ private TextView cn,cmn,cem,cci,pn,pqul,pqan,ps,da,pp,ono,os;
 
         if(v.getId() == R.id.load){
             previous.setVisibility(previous.VISIBLE);
+            up.setVisibility(up.VISIBLE);
+            spinner1.setVisibility(spinner1.VISIBLE);
             load.setText("Next");
             ++v1;
         }

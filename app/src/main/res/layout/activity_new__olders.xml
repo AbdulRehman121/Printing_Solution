@@ -207,9 +207,20 @@
         android:hint="Order Status"
         app:layout_constraintBottom_toTopOf="@+id/load"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.738"
+        app:layout_constraintHorizontal_bias="0.746"
         app:layout_constraintStart_toEndOf="@+id/product"
         app:layout_constraintTop_toBottomOf="@+id/OrderNo"
         app:layout_constraintVertical_bias="0.045" />
 
+    <Spinner
+        android:id="@+id/spinner2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:entries="@array/Status_arrays"
+        android:prompt="@string/Status_prompt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.954"
+        app:layout_constraintStart_toEndOf="@+id/product"
+        app:layout_constraintTop_toBottomOf="@+id/OrderNo" />
 </androidx.constraintlayout.widget.ConstraintLayout>

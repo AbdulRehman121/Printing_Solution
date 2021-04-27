@@ -2,6 +2,7 @@
     <string name="app_name">Printing Solution</string>
 
     <string name="FlexQuilty_prompt">Choose a country</string>
+    <string name="Status_prompt">Choose a country</string>
 
     <string-array name="FlexQuilty_arrays">
         <item>Select Quality</item>
@@ -16,6 +17,12 @@
 
     </string-array>
 
+    <string-array name="Status_arrays">
+        <item>Order Placed</item>
+        <item>Order InProcess</item>
+        <item>Order Ready</item>
+        <item>Order Comleted</item>
+    </string-array>
 
     <!--    <string-array name="CardQuilty_arrays">-->
     <!--        <item>Simple shine</item>-->

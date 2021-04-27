@@ -35,7 +35,6 @@ private Button Flex,orders;
         W = (TextView) findViewById(R.id.city);
         H = (TextView) findViewById(R.id.email);
         MN = (TextView) findViewById(R.id.MN);
-
         FID = FirebaseAuth.getInstance().getCurrentUser().getUid();
         DR = FirebaseDatabase.getInstance().getReference().child("Users").child(String.valueOf(FID));
         DR.addValueEventListener(new ValueEventListener() {
