@@ -40,8 +40,8 @@ public class login extends AppCompatActivity implements View.OnClickListener{
         firebaseAuth1= FirebaseAuth.getInstance();
         progressDialog =new ProgressDialog(this);
 
-        FID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        //DR = FirebaseDatabase.getInstance().getReference().child("Users").child(String.valueOf(FID));
+        //FID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+       // DR = FirebaseDatabase.getInstance().getReference().child("Users").child(String.valueOf(FID));
 
     }
     public void LOGIN(String email,String password)

@@ -1,8 +1,5 @@
 package com.example.printing_solution;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -11,8 +8,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.material.snackbar.BaseTransientBottomBar;
-import com.google.android.material.snackbar.Snackbar;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -47,6 +45,8 @@ private TextView cn,cmn,cem,cci,pn,pqul,pqan,ps,da,pp,ono,os;
         da=findViewById(R.id.address);
         pp=findViewById(R.id.pp);
         ono=findViewById(R.id.OrderNo);
+spinner1=findViewById(R.id.spinner);
+spinner1.setVisibility(spinner1.GONE);
         os=findViewById(R.id.Ostatus);
         up=(Button)findViewById(R.id.update);
         up.setVisibility(up.GONE);
@@ -55,13 +55,8 @@ private TextView cn,cmn,cem,cci,pn,pqul,pqan,ps,da,pp,ono,os;
         previous.setOnClickListener(this);
         load = (Button)findViewById(R.id.load);
         load.setOnClickListener(this);
-        spinner1=findViewById(R.id.spinner2);
-        spinner1.setVisibility(spinner1.GONE);
-        ArrayAdapter<String> myAdapter= new ArrayAdapter<String>
-                (New_Olders.this, android.R.layout.simple_list_item_1,
-                        getResources().getStringArray(R.array.Status_arrays));
-        myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner1.setAdapter(myAdapter);
+
+
         //FID = FirebaseAuth.getInstance().getCurrentUser().getUid();
         DatabaseReference cdbname = FirebaseDatabase.getInstance().getReference();
         cdbname.addValueEventListener(new ValueEventListener() {
@@ -77,12 +72,18 @@ private TextView cn,cmn,cem,cci,pn,pqul,pqan,ps,da,pp,ono,os;
 
             }
         });
+        ArrayAdapter<String> myAdapter= new ArrayAdapter<String>
+                (New_Olders.this, android.R.layout.simple_list_item_1,
+                        getResources().getStringArray(R.array.Status_arrays));
+        myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner1.setAdapter(myAdapter);
+
         up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 SI= spinner1.getSelectedItem().toString().trim();
                 Toast.makeText(getApplicationContext(),SI,LENGTH_SHORT).show();
-cdbname.addValueEventListener(new ValueEventListener() {
+        cdbname.addValueEventListener(new ValueEventListener() {
     @Override
     public void onDataChange(@NonNull DataSnapshot snapshot) {
         cdbname.child("Orders").child(sv1).child("Status").setValue(SI);
@@ -92,9 +93,10 @@ cdbname.addValueEventListener(new ValueEventListener() {
     public void onCancelled(@NonNull DatabaseError error) {
 
     }
-});
-            }
+});            }
        });
+
+
         }
 
     @Override

@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Printing_Solution">
-        <activity android:name=".C_Orders"></activity>
+        <activity android:name=".C_Orders" />
         <activity
             android:name=".New_Olders"
             android:screenOrientation="portrait" />

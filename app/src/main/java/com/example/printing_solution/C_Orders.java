@@ -32,7 +32,7 @@ public class C_Orders extends AppCompatActivity implements View.OnClickListener{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //FU = FirebaseAuth.getInstance().getCurrentUser();
-        setContentView(R.layout.activity_new__olders);
+        setContentView(R.layout.activity_c__orders);
         cn=findViewById(R.id.CName);
         cmn=findViewById(R.id.mobileno);
         cem=findViewById(R.id.mail);
@@ -91,17 +91,18 @@ for(int i=0;i<val;i++){
             DR.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    //if (FID == (snapshot.child("User Id").getValue().toString())) {
+                    UU= (snapshot.child("User Id").getValue().toString());
+                        if (FID.equals(UU)){
 
-                        pn.setText("Product: " + snapshot.child("Product").getValue().toString());
-                        pqul.setText("Quality: " + snapshot.child("Quality").getValue().toString());
-                        ps.setText("Size: " + snapshot.child("Height").getValue().toString() + " x " + snapshot.child("Width").getValue().toString());
-                        //  pqan.setText(snapshot.child("Quantity").getValue().toString());
-                        da.setText("Delivrey Address: " + snapshot.child("DAddress").getValue().toString());
-                        pp.setText("Price: " + snapshot.child("Price").getValue().toString());
-                        os.setText("Status: " + snapshot.child("Status").getValue().toString());
-                    //}
-                       /* DR1 = FirebaseDatabase.getInstance().getReference().child("Users").child(FID);
+                    pn.setText("Product: " + snapshot.child("Product").getValue().toString());
+                    pqul.setText("Quality: " + snapshot.child("Quality").getValue().toString());
+                    ps.setText("Size: " + snapshot.child("Height").getValue().toString() + " x " + snapshot.child("Width").getValue().toString());
+                    //  pqan.setText(snapshot.child("Quantity").getValue().toString());
+                    da.setText("Delivrey Address: " + snapshot.child("DAddress").getValue().toString());
+                    pp.setText("Price: " + snapshot.child("Price").getValue().toString());
+                    os.setText("Status: " + snapshot.child("Status").getValue().toString());
+
+                        DR1 = FirebaseDatabase.getInstance().getReference().child("Users").child(FID);
                         DR1.addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -115,8 +116,12 @@ for(int i=0;i<val;i++){
                             public void onCancelled(@NonNull DatabaseError error) {
 
                             }
-                        });*/
+                        });
                     }
+                        else {
+                            ++v1;
+                        }
+                }
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {

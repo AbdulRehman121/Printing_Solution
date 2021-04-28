@@ -213,14 +213,18 @@
         app:layout_constraintVertical_bias="0.045" />
 
     <Spinner
-        android:id="@+id/spinner2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
+        android:id="@+id/spinner"
+        android:layout_width="166dp"
+        android:layout_height="33dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginRight="40dp"
         android:entries="@array/Status_arrays"
         android:prompt="@string/Status_prompt"
+        app:layout_constraintBottom_toTopOf="@+id/update"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.954"
-        app:layout_constraintStart_toEndOf="@+id/product"
-        app:layout_constraintTop_toBottomOf="@+id/OrderNo" />
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/Quantity"
+        app:layout_constraintTop_toBottomOf="@+id/Ostatus"
+        app:layout_constraintVertical_bias="0.14" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
