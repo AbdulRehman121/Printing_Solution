@@ -86,21 +86,24 @@ for(int i=0;i<val;i++){
         if (v1<val && v1!=0)
         {
             sv1 = String.valueOf(v1);
-            ono.setText("Order NO: "+sv1);
+
             DR = FirebaseDatabase.getInstance().getReference().child("Orders").child(sv1);
             DR.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    UU= (snapshot.child("User Id").getValue().toString());
-                        if (FID.equals(UU)){
+                    UU = (snapshot.child("User Id").getValue().toString());
 
-                    pn.setText("Product: " + snapshot.child("Product").getValue().toString());
-                    pqul.setText("Quality: " + snapshot.child("Quality").getValue().toString());
-                    ps.setText("Size: " + snapshot.child("Height").getValue().toString() + " x " + snapshot.child("Width").getValue().toString());
-                    //  pqan.setText(snapshot.child("Quantity").getValue().toString());
-                    da.setText("Delivrey Address: " + snapshot.child("DAddress").getValue().toString());
-                    pp.setText("Price: " + snapshot.child("Price").getValue().toString());
-                    os.setText("Status: " + snapshot.child("Status").getValue().toString());
+                    if (FID.equals(UU)) {
+
+
+                        ono.setText("Order NO: " + sv1);
+                        pn.setText("Product: " + snapshot.child("Product").getValue().toString());
+                        pqul.setText("Quality: " + snapshot.child("Quality").getValue().toString());
+                        ps.setText("Size: " + snapshot.child("Height").getValue().toString() + " x " + snapshot.child("Width").getValue().toString());
+                        //  pqan.setText(snapshot.child("Quantity").getValue().toString());
+                        da.setText("Delivrey Address: " + snapshot.child("DAddress").getValue().toString());
+                        pp.setText("Price: " + snapshot.child("Price").getValue().toString());
+                        os.setText("Status: " + snapshot.child("Status").getValue().toString());
 
                         DR1 = FirebaseDatabase.getInstance().getReference().child("Users").child(FID);
                         DR1.addValueEventListener(new ValueEventListener() {
@@ -117,12 +120,10 @@ for(int i=0;i<val;i++){
 
                             }
                         });
-                    }
-                        else {
-                            ++v1;
-                        }
-                }
 
+                    }
+
+                }
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
 
