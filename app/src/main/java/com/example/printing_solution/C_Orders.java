@@ -65,9 +65,7 @@ public class C_Orders extends AppCompatActivity implements View.OnClickListener{
 
             }
         });
-for(int i=0;i<val;i++){
 
-}
     }
 
     @Override
@@ -86,15 +84,14 @@ for(int i=0;i<val;i++){
         if (v1<val && v1!=0)
         {
             sv1 = String.valueOf(v1);
-
-            DR = FirebaseDatabase.getInstance().getReference().child("Orders").child(sv1);
+            for(int beta=v1;beta<val;beta++)
+            {
+            DR = FirebaseDatabase.getInstance().getReference().child("Orders").child(String.valueOf(beta));
             DR.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     UU = (snapshot.child("User Id").getValue().toString());
-
                     if (FID.equals(UU)) {
-
 
                         ono.setText("Order NO: " + sv1);
                         pn.setText("Product: " + snapshot.child("Product").getValue().toString());
@@ -120,7 +117,6 @@ for(int i=0;i<val;i++){
 
                             }
                         });
-
                     }
 
                 }
@@ -128,7 +124,7 @@ for(int i=0;i<val;i++){
                 public void onCancelled(@NonNull DatabaseError error) {
 
                 }
-            });
+            });}
         }
         else
         {
