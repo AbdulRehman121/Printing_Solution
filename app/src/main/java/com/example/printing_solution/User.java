@@ -44,10 +44,10 @@ private Button Flex,orders;
                 String city = snapshot.child("City").getValue().toString();
                 String email = snapshot.child("email").getValue().toString();
                 String MN1 = snapshot.child("mobile_no").getValue().toString();
-                UN.setText(name);
-                W.setText(city);
-                H.setText(email);
-                MN.setText(MN1);
+                UN.setText("NAME: "+name);
+                W.setText("CITY: "+city);
+                H.setText("EMAIL: "+email);
+                MN.setText("MOBULE NO: "+MN1);
 
             }
 
